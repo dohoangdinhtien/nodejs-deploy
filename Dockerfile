@@ -13,7 +13,8 @@ WORKDIR /usr/src/app
 COPY --chown=node:node . /usr/src/app
 
 # Install only production dependencies
-RUN npm ci --only=production
+# RUN npm ci --only=production
+RUN npm install
 
 # friends don’t let friends run containers as root!
 USER node
