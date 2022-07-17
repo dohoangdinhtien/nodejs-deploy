@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: docker.pkg.github.com
+  REGISTRY: ghcr.io
   REPO: dohoangdinhtien/nodejs-deploy/nodejs-image
   CONTAINER: nodejs-image
 
