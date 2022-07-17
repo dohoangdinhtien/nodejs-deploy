@@ -79,21 +79,26 @@ jobs:
 
       - name: Pull latest container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull blackwhite152/demo:main"
+            docker pull blackwhite152/demo:main
+#         run: |
+#           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull blackwhite152/demo:main"
           
       - name: Stop deployed container
         continue-on-error: true
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker stop ${{env.CONTAINER}}"
+           docker stop ${{env.CONTAINER}}
+#          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker stop ${{env.CONTAINER}}"
           
       - name: Remove deployed container
         continue-on-error: true
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker rm ${{env.CONTAINER}}"
+          docker rm ${{env.CONTAINER}}
+#          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker rm ${{env.CONTAINER}}"
           
       - name: Start docker container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:latest"
+          docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:latest
+#          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:latest"
       
 #       - name: Logout from the GitHub Packages Docker Registry
 #         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker logout ${{env.REGISTRY}}"
