@@ -73,6 +73,9 @@ jobs:
           script: |
             whoami
             docker pull blackwhite152/demo:main
+            docker stop ${{env.CONTAINER}}
+            docker rm ${{env.CONTAINER}}
+            docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:main
 
 #       - name: Login to the GitHub Packages Docker Registry
 #         run: |
