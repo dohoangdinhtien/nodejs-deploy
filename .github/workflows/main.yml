@@ -70,7 +70,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: whoami
+          script: |
+            whoami
+            docker pull blackwhite152/demo:main
 
 #       - name: Login to the GitHub Packages Docker Registry
 #         run: |
