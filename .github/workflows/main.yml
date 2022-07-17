@@ -75,7 +75,7 @@ jobs:
 #           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Login to the Docker Hub Registry
-        run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}"
+        run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin ${{ secrets.DOCKER_TOKEN }}"
 
       - name: Pull latest container
         run: |
