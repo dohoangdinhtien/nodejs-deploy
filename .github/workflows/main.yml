@@ -62,6 +62,15 @@ jobs:
 
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: whoami
 
 #       - name: Login to the GitHub Packages Docker Registry
 #         run: |
@@ -77,27 +86,27 @@ jobs:
 #       - name: Login to the Docker Hub Registry
 #         run: ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin ${{ secrets.DOCKER_TOKEN }}"
 
-      - name: Pull latest container
-        run: |
-            docker pull blackwhite152/demo:main
+#       - name: Pull latest container
+#         run: |
+#             docker pull blackwhite152/demo:main
 #         run: |
 #           ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull blackwhite152/demo:main"
           
-      - name: Stop deployed container
-        continue-on-error: true
-        run: |
-           docker stop ${{env.CONTAINER}}
+#       - name: Stop deployed container
+#         continue-on-error: true
+#         run: |
+#            docker stop ${{env.CONTAINER}}
 #          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker stop ${{env.CONTAINER}}"
           
-      - name: Remove deployed container
-        continue-on-error: true
-        run: |
-          docker rm ${{env.CONTAINER}}
+#       - name: Remove deployed container
+#         continue-on-error: true
+#         run: |
+#           docker rm ${{env.CONTAINER}}
 #          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker rm ${{env.CONTAINER}}"
           
-      - name: Start docker container
-        run: |
-          docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:main
+#       - name: Start docker container
+#         run: |
+#           docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:main
 #          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker run -p 8080:8080 -d --name=${{env.CONTAINER}} blackwhite152/demo:main"
       
 #       - name: Logout from the GitHub Packages Docker Registry
