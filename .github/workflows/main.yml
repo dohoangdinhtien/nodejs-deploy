@@ -76,7 +76,7 @@ jobs:
 
       - name: Pull latest container
         run: |
-          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull blackwhite152/demo:latest"
+          ssh ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "docker pull blackwhite152/demo:main"
           
       - name: Stop deployed container
         continue-on-error: true
